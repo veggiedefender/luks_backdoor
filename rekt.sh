@@ -18,20 +18,25 @@ fi
 mkdir mnt
 mount "$1" mnt
 
-for INITFILE in mnt/initramfs-*.img; do
-	echo '[ Backing up initramfs ]'
-	cp mnt/${INITFILE} mnt/${INITFILE}-backup
+if [ -z "$2" ]
+  then
+    FNAME="initramfs-linux"
+  else
+  	FNAME=$2
+fi
 
-	echo '[ Extracting initramfs img ]'
-	mkdir extracted
-	pushd extracted
-	lsinitcpio -x ../mnt/${INITFILE}
+echo '[ Backing up initramfs ]'
+cp mnt/${FNAME}.img /${FNAME}-backup.img
 
-	echo '[ Patching encrypt hook ]'
-	cp ../encrypt hooks/encrypt
+echo '[ Extracting initramfs-linux.img ]'
+mkdir extracted
+pushd extracted
+lsinitcpio -x ../mnt/${FNAME}.img
 
-	echo '[ Repacking initramfs-linux.img ]'
-	find . -mindepth 1 -printf '%P\0' | LANG=C bsdcpio -0 -o -H newc --quiet | gzip > ../${INITFILE}
+echo '[ Patching encrypt hook ]'
+cp ../encrypt hooks/encrypt
 
-	echo 'Please inspect and manually copy initramfs-linux.img to mnt'
-done
+echo '[ Repacking initramfs-linux.img ]'
+find . -mindepth 1 -printf '%P\0' | LANG=C bsdcpio -0 -o -H newc --quiet | gzip > ../${FNAME}.img
+
+echo 'Please inspect and manually copy the initramfs to mnt'
