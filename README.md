@@ -37,10 +37,9 @@ is valid by running the same `cryptsetup open` that it normally uses, and if tha
 ```
 # This works with a default initramfs named initramfs-linux.img
 sudo ./rekt.sh /dev/mapper/boot-partition
-# This works with custom initramfs names
+# This works with custom initramfs names (note the lack of the .img)
 sudo ./rekt.sh /dev/mapper/boot-partition initramfs-name
 ```
-
 
 ## Limitations
 * Niche use-case (see [Threat model](#threat-model))
