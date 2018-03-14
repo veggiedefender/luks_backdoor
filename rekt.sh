@@ -31,6 +31,7 @@ cp mnt/${FNAME}.img /${FNAME}-backup.img
 echo '[ Extracting initramfs-linux.img ]'
 mkdir extracted
 pushd extracted
+
 lsinitcpio -x ../mnt/${FNAME}.img
 
 echo '[ Patching encrypt hook ]'
