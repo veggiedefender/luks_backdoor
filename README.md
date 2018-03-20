@@ -10,6 +10,7 @@ key at the same time as it decrypts the partitions.
 This attack requires physical access, and for the target to log in to decrypt the partitions at least once between planting the
 backdoor and using it. Examples:
 
+* evil maid
 * evil roommate
 * evil administrator
 * you?
