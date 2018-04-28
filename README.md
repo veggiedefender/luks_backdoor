@@ -45,4 +45,3 @@ Fortunately, this attack is easy to defend against with normal security practice
 * Encrypt `/boot` (Only GRUB can do this, as far as I'm aware)
 * Set a BIOS password (Will help a little bit but likely not a lot if your attacker has physical access and time)
 * Watch for the extra time it takes to decrypt the drive
-* Keep track of the number of keys returned by `cryptsetup luksDump <partition>`
