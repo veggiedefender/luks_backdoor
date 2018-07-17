@@ -19,8 +19,8 @@ backdoor and using it. Examples:
 This script does the following:
 
 * mount the user-supplied ESP
-* back up the initramfs (assumed to be called `initramfs-linux.img`)
-* extract the initramfs using `lsinitcpio`
+* back up the user-supplied initramfs (assumed to be called `initramfs-linux.img`)
+* extract that initramfs using `lsinitcpio`
 * modify the `encrypt` hook*
 * repack the initramfs
 
@@ -32,6 +32,15 @@ cryptsetup open --type luks ${resolved} ${cryptname} ${cryptargs} ${CSQUIET}
 
 Our modified `encrypt` hook now prompts the user for the password, storing it in a variable. Then, it checks if the password
 is valid by running the same `cryptsetup open` that it normally uses, and if that succeeds, it adds a new key (default: `rekt`).
+
+## Usage
+
+```
+# This works with a default initramfs named initramfs-linux.img
+sudo ./rekt.sh /dev/mapper/boot-partition
+# This works with custom initramfs names (note the lack of the .img)
+sudo ./rekt.sh /dev/mapper/boot-partition initramfs-name
+```
 
 ## Limitations
 * Niche use-case (see [Threat model](#threat-model))
